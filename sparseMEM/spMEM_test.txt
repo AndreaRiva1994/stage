@@ -1,0 +1,71 @@
+afumig anidulans spMEM1 20 29513.8 318604
+afumig anidulans spMEM2 20 40086.5 179684
+afumig anidulans spMEM3 20 79269 132808
+afumig anidulans spMEM4 20 250784 110376
+afumig anidulans spMEM8 20 405353 75780
+human21 mouse16 spMEM1 50 93389.8 440676
+human21 mouse16 spMEM2 50 148497 284432
+human21 mouse16 spMEM3 50 273721 199712
+human21 mouse16 spMEM4 50 725717 173728
+human21 mouse16 spMEM8 50 1.50159e+06 167364
+mouse16 human21 spMEM1 50 40478.5 980852
+mouse16 human21 spMEM2 50 66784.2 590640
+mouse16 human21 spMEM3 50 118675 443176
+mouse16 human21 spMEM4 50 374559 371648
+mouse16 human21 spMEM8 50 855965 261424
+dsim dsec spMEM1 50 169795 1525044
+dsim dsec spMEM2 50 260900 843576
+dsim dsec spMEM3 50 448400 615264
+dsim dsec spMEM4 50 1.46056e+06 502396
+dsim dsec spMEM8 50 3.75983e+06 364980
+dmel dsec spMEM1 50 194880 1904072
+dmel dsec spMEM2 50 326388 1027856
+dmel dsec spMEM3 50 755059 742276
+dmel dsec spMEM4 50 2.10202e+06 602188
+dmel dsec spMEM8 50 2.10202e+06
+dmel dyak spMEM1 50 2.10202e+06
+dmel dyak spMEM2 50 2.10202e+06
+dmel dyak spMEM3 50 2.10202e+06
+dmel dyak spMEM4 50 2.10202e+06
+dmel dyak spMEM8 50 2.10202e+06
+dmel dyak spMEM1 50 201565 1904732
+dmel dyak spMEM2 50 389204 1024884
+dmel dyak spMEM3 50 854765 758000
+dmel dyak spMEM4 50 2.36168e+06 600352
+dmel dyak spMEM8 50 4.59192e+06 434020
+dmel dsec spMEM8 50 3.72267e+06 426488
+afumig anidulans spMEM1 20 34362.1 318628
+afumig anidulans spMEM2 20 40426.5 179712
+afumig anidulans spMEM3 20 83981.2 132836
+afumig anidulans spMEM4 20 256780 110408
+afumig anidulans spMEM8 20 377072 75808
+cerev pombe spMEM1 50 377072 0
+cerev pombe spMEM2 50 15673 120276
+cerev pombe spMEM3 50 32186 93432
+cerev pombe spMEM4 50 77920.9 80004
+cerev pombe spMEM8 50 77920.9 0
+human21 mouse16 spMEM1 250 76848.8 440672
+human21 mouse16 spMEM2 250 139181 284424
+human21 mouse16 spMEM3 250 248068 199708
+human21 mouse16 spMEM4 250 678590 173688
+human21 mouse16 spMEM8 250 1.3785e+06 167324
+mouse16 human21 spMEM1 250 39146.4 983216
+mouse16 human21 spMEM2 250 66836.2 590636
+mouse16 human21 spMEM3 250 114923 443172
+mouse16 human21 spMEM4 250 420210 371640
+mouse16 human21 spMEM8 250 813811 261420
+dsim dsec spMEM1 250 125132 1525080
+dsim dsec spMEM2 250 269501 841592
+dsim dsec spMEM3 250 542602 615300
+dsim dsec spMEM4 250 2.1281e+06 502428
+dsim dsec spMEM8 250 5.11316e+06 365008
+dmel dsec spMEM1 250 178487 1904084
+dmel dsec spMEM2 250 472730 1026864
+dmel dsec spMEM3 250 991902 742308
+dmel dsec spMEM4 250 2.95237e+06 602220
+dmel dsec spMEM8 250 5.77877e+06 426516
+dmel dyak spMEM1 250 209969 1902100
+dmel dyak spMEM2 250 325184 1024944
+dmel dyak spMEM3 250 722613 743492
+dmel dyak spMEM4 250 3.35399e+06 600208
+dmel dyak spMEM8 250 4.37514e+06 434044
