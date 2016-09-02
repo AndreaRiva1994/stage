@@ -1,5 +1,5 @@
 CXXFLAGS= -fpermissive -O3 -DNDEBUG -std=c++11 #-g -DSDSL_DEBUG # -O3 -DNDEBUG -DSDSL_DEBUG
-SDSLINC=./src
+SDSLINC=../src
 SDSLLIB=$(SDSLINC)/sdsl-lite/build/lib/libsdsl.a
 
 all: backwardMEM1 backwardMEM2 backwardMEM4 backwardMEM8 backwardMEM16 
