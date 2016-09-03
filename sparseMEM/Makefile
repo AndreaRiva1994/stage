@@ -1,10 +1,10 @@
-FLAGS = -O3 -I../backwardMEM/sdsl-0.7.3/src/
+FLAGS = -O3 -I../lib/sdsl-lite/include/sdsl/
 SRC = mummer.cpp qsufsort.c sparseSA.cpp fasta.cpp
 
 all: mummer 
 
 mummer: mummer.o qsufsort.o sparseSA.o fasta.o
-	g++ -pthread $(FLAGS) $^ -o $@ ../backwardMEM/sdsl-0.7.3/src/sdsl/.libs/libsdsl.a
+	g++ -pthread $(FLAGS) $^ -o $@ ../lib/sdsl-lite/build/lib/libsdsl.a
 
 .cpp.o:
 	g++ $(FLAGS) -Wall -c $<

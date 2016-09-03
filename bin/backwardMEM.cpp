@@ -450,16 +450,16 @@ int main(int argc, char* argv[]) {
   }
   
   
-  //write_lock(1);
+  write_lock(1);
   
   //  	vector<long> qstartpos;                                              da non scommentare
   //	load_fasta(query_fasta, query, querydescr, qstartpos);               da non scommentare
   
-  // stop_watch stopwatch;
-  // stopwatch.start();
+  stop_watch stopwatch;
+  stopwatch.start();
   
   anwer_query(query_fasta, cst, min_len, refdescr, startpos, maxdescrlen, rev_comp, _4column, nucleotides_only);
-  /* stopwatch.stop();
+  stopwatch.stop();
   cerr<<"# Time for algorithm: ";
   cerr<<stopwatch.getUserTime();
   ofstream stopwatchfile("stopwatch.txt", ios_base::trunc);
@@ -467,7 +467,7 @@ int main(int argc, char* argv[]) {
   stopwatchfile.close();
   write_lock(0);
   
-  cerr<<endl;*/
+  cerr<<endl;
 }
 
 
