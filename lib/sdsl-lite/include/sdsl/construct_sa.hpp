@@ -25,8 +25,8 @@
 #include "config.hpp"
 #include "int_vector.hpp"
 
-#include "../../../../src/divsufsort.h"
-#include "../../../../src/divsufsort64.h"
+#include "../../build/external/libdivsufsort/include/divsufsort.h"
+#include "../../build/external/libdivsufsort/include/divsufsort64.h"
 
 #include "qsufsort.hpp"
 
