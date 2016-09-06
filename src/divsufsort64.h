@@ -30,10 +30,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
-  
-#include <inttypes.h>
-  
-  //INCFILE
+
+//INCFILE
 
 #ifndef DIVSUFSORT_API
 # ifdef DIVSUFSORT_BUILD_DLL
@@ -46,15 +44,15 @@ extern "C" {
 /*- Datatypes -*/
 #ifndef SAUCHAR_T
 #define SAUCHAR_T
-typedef uint8_t sauchar_t;
+typedef SAUCHAR_TYPE sauchar_t;
 #endif /* SAUCHAR_T */
 #ifndef SAINT_T
 #define SAINT_T
-typedef int32_t saint_t;
+typedef SAINT32_TYPE saint_t;
 #endif /* SAINT_T */
 #ifndef SAIDX64_T
 #define SAIDX64_T
-typedef int64_t saidx64_t;
+typedef SAINT64_TYPE saidx64_t;
 #endif /* SAIDX64_T */
 #ifndef PRIdSAINT_T
 #define PRIdSAINT_T SAINT_PRId
