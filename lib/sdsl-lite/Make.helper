@@ -1,5 +1,5 @@
-LIB_DIR = /home/andrea/lib
-INC_DIR = /home/andrea/include
+LIB_DIR = /home/andrea/calcMEM/lib/sdsl-lite/lib
+INC_DIR = /home/andrea/calcMEM/lib/sdsl-lite/include
 MY_CXX_FLAGS= -std=c++11 -Wall -Wextra -DNDEBUG $(CODE_COVER)
 MY_CXX_OPT_FLAGS= -O3 -ffast-math -funroll-loops -msse4.2 -DHAVE_CXA_DEMANGLE
 MY_CXX=/usr/bin/c++

@@ -31,28 +31,28 @@
 extern "C" {
 #endif /* __cplusplus */
 
-//INCFILE
+#include <inttypes.h>
 
 #ifndef DIVSUFSORT_API
 # ifdef DIVSUFSORT_BUILD_DLL
-#  define DIVSUFSORT_API DIVSUFSORT_EXPORT
+#  define DIVSUFSORT_API //DIVSUFSORT_EXPORT
 # else
-#  define DIVSUFSORT_API DIVSUFSORT_IMPORT
+#  define DIVSUFSORT_API //DIVSUFSORT_IMPORT
 # endif
 #endif
 
 /*- Datatypes -*/
 #ifndef SAUCHAR_T
 #define SAUCHAR_T
-typedef SAUCHAR_TYPE sauchar_t;
+typedef uint8_t sauchar_t;
 #endif /* SAUCHAR_T */
 #ifndef SAINT_T
 #define SAINT_T
-typedef SAINT32_TYPE saint_t;
+typedef int32_t saint_t;
 #endif /* SAINT_T */
 #ifndef SAIDX64_T
 #define SAIDX64_T
-typedef SAINT64_TYPE saidx64_t;
+typedef int64_t saidx64_t;
 #endif /* SAIDX64_T */
 #ifndef PRIdSAINT_T
 #define PRIdSAINT_T SAINT_PRId
