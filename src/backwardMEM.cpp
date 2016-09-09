@@ -50,7 +50,7 @@ typedef csa_wt<csa_wt<>::wavelet_tree_type, BWTK, 10000> tCSA_WT;
 #else
 typedef csa_wt<csa_wt<>::wavelet_tree_type, 4, 10000> tCSA_WT;
 #endif
-
+//csa_wt<>::wavelet_tree_type, 4, 10000
 
 #ifdef LCPCOMPRESS
 typedef cst_sct3<tCSA_WT, lcp_dac<> > tCST;
@@ -76,7 +76,7 @@ tCST::size_type backward_search_(
 )
 {
   typedef tCST::size_type size_type;
-  
+
   size_type cc = csa.char2comp[c];
   if(cc==0){
     lb=rb=0;
@@ -203,15 +203,16 @@ void maximal_exact_matches(const tCST &cst1, const unsigned char *s2, tCST::size
   size_type p2 = n2;
   size_type i = 0, j = cst1.size();
   size_type c = 0;
+  size_type tre = 0;
 	while( p2 > 0 ){
 	  path_type path;
 	  size_type lb = i, rb = j;
-		backward_search(cst1.csa, s2[p2-1], lb, rb);	
+		backward_search(cst1.csa, s2[p2-1], lb, rb);
 		while(lb != rb and p2 > 0){
-		  ++c;
+		  c++;
 		  if( c >= l ) path.push_back( path_item(c, lb, rb, p2-1) );
 		  i = lb; j = rb;
-		  --p2;
+		  p2--;
 		  backward_search(cst1.csa, s2[p2-1], lb, rb);
 		}
 		for(path_type::const_iterator it = path.begin(); it!=path.end(); ++it){
@@ -228,18 +229,19 @@ void maximal_exact_matches(const tCST &cst1, const unsigned char *s2, tCST::size
 		    }
 		    lb = lb_; rb = rb_;
 		    node_type p = cst1.parent( node_type(c_, lb_, rb_-1) );
-		    c_ 			= cst1.depth(p);
-		    lb_			= cst1.lb(p);
-		    rb_			= cst1.rb(p)+1;
+		    c_  = cst1.depth(p);
+		    lb_ = cst1.lb(p);
+		    rb_	= cst1.rb(p)+1;
 		  }
 		}
-		if( 0==c ){
-		  --p2;
+		if( c==0 ){
+		  p2--;
 		}else{
 		  node_type p = cst1.parent( node_type(c, i, j-1) );
-		  c 			= cst1.depth(p);
-		  i		 	= cst1.lb(p); 
-		  j 			= cst1.rb(p)+1;
+		  // c = cst1.depth(p);
+		  cout << "--------------" << endl;
+		  i = cst1.lb(p);
+		  j = cst1.rb(p)+1;
 		}
 	}
 }
@@ -320,7 +322,6 @@ void anwer_query(const string &query_fasta, const tCST &cst1, tCST::size_type mi
   if(meta != "") {
 	  cerr << "# P.length()=" << P->length() << endl;
 	  printf("> %s\n", meta.c_str());
-	  
 	  maximal_exact_matches(cst1, (const unsigned char*)P->c_str(), P->size(), min_len, _4column, refdescr, startpos, maxdescrlen, 0);
 	  if(rev_comp) {
 	    reverse_complement(*P, nucleotides_only);
@@ -398,7 +399,7 @@ int main(int argc, char* argv[]) {
   vector<long> startpos;
   
   load_fasta(ref_fasta, ref, refdescr, startpos);
-  
+
   for(size_t i=0;i<refdescr.size();i++){	
     cerr<<refdescr[i]<<endl;
     cerr<<startpos[i]<<endl;
@@ -417,26 +418,27 @@ int main(int argc, char* argv[]) {
   }
 
 
+
   tCST cst;
-
-
+  
 
   string file_name = ref_fasta+"_"+XSTR(BWTK)+".idx";
   std::cerr<<"# file_name"<<file_name<<std::endl;
+  
   // create compressed suffix tree
-  if( !load_from_file(cst,file_name.c_str()) ){
+  //if( !load_from_file(cst,file_name) ){
     cerr<<"# create suffix tree of dna string "<<endl;
     startpos.clear(); refdescr.clear(); 
     cerr<<"ref_fasta = "<<ref_fasta<<endl;
     load_fasta(ref_fasta, ref, refdescr, startpos);
     construct_im(cst, ref, 1);
     cerr<<"# suffix tree created"<<endl;
-    store_to_file(cst, file_name.c_str());
-  }else{
-    cerr<<"#load index from disk"<<endl;
-  }
+    store_to_file(cst, file_name);
+    // }else{
+    //  cerr<<"#load index from disk"<<endl;
+    //}
   cerr<<"# size of suffix tree in MB "<< ((double)size_in_mega_bytes(cst))/(1<<20) <<endl;
-  cerr<<"# alpahbet size: "<< (int)cst.csa.sigma << endl;
+  cerr<<"# alphabet size: "<< (int)cst.csa.sigma << endl;
   for(int i=1; i<(int)cst.csa.sigma; ++i)
     {
       cerr<<"\""<<cst.csa.comp2char[i]<<"\" ";

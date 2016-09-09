@@ -164,7 +164,7 @@ void load(std::vector<X>& x, std::istream& in)
 
 //! Load sdsl-object v from a file.
 /*!
- * \param v sdsl-
+ * \param v sdsl-object
  * \param file Name of the serialized file.
  */
 template<class T>
