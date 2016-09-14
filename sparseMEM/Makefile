@@ -1,10 +1,13 @@
 FLAGS = -O3 -I../lib/sdsl-lite/include/sdsl/
 SRC = mummer.cpp qsufsort.c sparseSA.cpp fasta.cpp
+SDSLLIB=../lib/sdsl-lite/build/lib/libsdsl.a
+SDSLDIV=../lib/sdsl-lite/build/lib/libdivsufsort.a
+SDSLDIV64=../lib/sdsl-lite/build/lib/libdivsufsort64.a
 
 all: mummer 
 
 mummer: mummer.o qsufsort.o sparseSA.o fasta.o
-	g++ -pthread $(FLAGS) $^ -o $@ ../lib/sdsl-lite/build/lib/libsdsl.a
+	g++ -pthread $(FLAGS) $^ -o $@  $(SDSLLIB) $(SDSLDIV) $(SDSLDIV64)
 
 .cpp.o:
 	g++ $(FLAGS) -Wall -c $<

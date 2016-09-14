@@ -1,21 +1,21 @@
 /* sdsl - succinct data structures library
-    Copyright (C) 2009 Simon Gog 
+   Copyright (C) 2009 Simon Gog 
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see http://www.gnu.org/licenses/ .
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see http://www.gnu.org/licenses/ .
 */
 /*! 
-	\author Simon Gog
+  \author Simon Gog
 */
 #include "../lib/sdsl-lite/include/sdsl/suffix_trees.hpp"   
 #include "../lib/sdsl-lite/include/sdsl/suffix_array_algorithm.hpp"  
@@ -73,7 +73,7 @@ tCST::size_type backward_search_(
 				 const unsigned char c,
 				 tCST::size_type &lb,
 				 tCST::size_type &rb
-)
+				 )
 {
   typedef tCST::size_type size_type;
 
@@ -83,45 +83,45 @@ tCST::size_type backward_search_(
     return 0;
   }
   size_type c_begin = csa.C[cc];  // interval begin of character c (inclusive)
-	size_type c_end   = csa.C[cc+1];// interval end of character c (exclusive)
-	if( c_begin == c_end ){
-		lb = rb = 0;
-		return 0;
-	}
-	// logarithmic solution
-	size_type begin = c_begin, end = c_end, mid;
-	while(begin != end){
-		mid = (begin+end)>>1;  // begin <= mid < end
-		if( csa.psi[mid] < lb ){
-		  begin = mid+1;
-		}else{
-		  end = mid;
-		}
-	}
-	assert(begin==c_end or csa.psi[begin] >= lb);
-	if(begin < c_end){
-	  lb = begin;
-	}else{
-	  return lb = rb = 0;
-	}
-	end = c_end;
-	while(begin != end){
-		mid = (begin+end)>>1; // begin <= mid < end
-		if( csa.psi[mid] < rb ){
-		  begin = mid+1;	
-		}else{
-		  end = mid;
-		}
-	}
-	assert(end==c_end or csa.psi[end] >= rb);
-	assert(end == c_begin or csa.psi[end-1]<rb);
-	if( end > c_begin){
-	  rb = end;
-	}else{
-	  return rb = lb = 0;
-	}
+  size_type c_end   = csa.C[cc+1];// interval end of character c (exclusive)
+  if( c_begin == c_end ){
+    lb = rb = 0;
+    return 0;
+  }
+  // logarithmic solution
+  size_type begin = c_begin, end = c_end, mid;
+  while(begin != end){
+    mid = (begin+end)>>1;  // begin <= mid < end
+    if( csa.psi[mid] < lb ){
+      begin = mid+1;
+    }else{
+      end = mid;
+    }
+  }
+  assert(begin==c_end or csa.psi[begin] >= lb);
+  if(begin < c_end){
+    lb = begin;
+  }else{
+    return lb = rb = 0;
+  }
+  end = c_end;
+  while(begin != end){
+    mid = (begin+end)>>1; // begin <= mid < end
+    if( csa.psi[mid] < rb ){
+      begin = mid+1;	
+    }else{
+      end = mid;
+    }
+  }
+  assert(end==c_end or csa.psi[end] >= rb);
+  assert(end == c_begin or csa.psi[end-1]<rb);
+  if( end > c_begin){
+    rb = end;
+  }else{
+    return rb = lb = 0;
+  }
 	
-	return rb-lb;
+  return rb-lb;
 }
 
 // \log |\Sigma| backward search on the wavelet tree
@@ -133,24 +133,25 @@ tCST::size_type backward_search(
   typedef tCST::size_type size_type;
   size_type cc = csa.char2comp[c];
   if(cc==0){
-		lb=rb=0;
-		return 0;
+    lb=rb=0;
+    return 0;
   }
   size_type c_before_l = csa.wavelet_tree.rank(lb, c);
   size_type c_before_r = csa.wavelet_tree.rank(rb, c);
   size_type lb2 = lb, rb2 = rb;
-	lb = csa.C[cc]+c_before_l;
-	rb = csa.C[cc]+c_before_r;
-	return rb-lb;
+  lb = csa.C[cc]+c_before_l;
+  rb = csa.C[cc]+c_before_r;
+  return rb-lb;
 }
 
 void print_maximal_exact_match(tCST::size_type p1, tCST::size_type p2, tCST::size_type len, bool _4column, const vector<string> &refdescr, const vector<long> &startpos, long maxdescrlen){
   if(_4column == false) {
-    printf("%8ld  %8ld  %8ld\n", p1 + 1, p2+ 1, len);
+    printf("%8ld  %8ld  %8ld\n", p1+1, p2+1, len);
+    cout << "-----------" << endl;
   }
   else {
     long refseq=0, refpos=0;
-	// Use binary search to locate index of sequence and position
+    // Use binary search to locate index of sequence and position
     // within sequence.
     vector<long>::const_iterator it = upper_bound(startpos.begin(), startpos.end(), (long)p1);
     refseq = distance(startpos.begin(), it) - 1;
@@ -158,7 +159,7 @@ void print_maximal_exact_match(tCST::size_type p1, tCST::size_type p2, tCST::siz
     it--;
     refpos = p1 - *it;
     printf("  %s", refdescr[refseq].c_str());
-    for(long j = 0; j < maxdescrlen - (long)refdescr[refseq].size() + 1; j++) putchar(' '); 
+    for(long j = 0; j < maxdescrlen - (long)refdescr[refseq].size() + 1; j++) putchar(' ');
     printf(" %8ld  %8ld  %8ld\n", refpos + 1, p2 + 1, len);
   }
 }
@@ -177,9 +178,9 @@ void report_maximal_exact_match(const tCST &cst1, const unsigned char *s2, size_
     size_type cc2 = cst1.csa.char2comp[s2[p2_-1]];
     
     if( !(cst1.csa.C[cc2] <= lf_k and lf_k < cst1.csa.C[cc2+1]) ){
-			print_maximal_exact_match(sa_k, p2_+p2_offset, c_, _4column, refdescr, startpos, maxdescrlen);
+      print_maximal_exact_match(sa_k, p2_+p2_offset, c_, _4column, refdescr, startpos, maxdescrlen);
     }
-	}
+  }
 }
 
 
@@ -198,52 +199,51 @@ void maximal_exact_matches(const tCST &cst1, const unsigned char *s2, tCST::size
   typedef tCST::node_type node_type;
   typedef tCST::size_type size_type;
   typedef list<path_item> path_type;
-  assert( l > 0 );
   
+  assert( l > 0 );
   size_type p2 = n2;
   size_type i = 0, j = cst1.size();
   size_type c = 0;
   size_type tre = 0;
-	while( p2 > 0 ){
-	  path_type path;
-	  size_type lb = i, rb = j;
-		backward_search(cst1.csa, s2[p2-1], lb, rb);
-		while(lb != rb and p2 > 0){
-		  c++;
-		  if( c >= l ) path.push_back( path_item(c, lb, rb, p2-1) );
-		  i = lb; j = rb;
-		  p2--;
-		  backward_search(cst1.csa, s2[p2-1], lb, rb);
-		}
-		for(path_type::const_iterator it = path.begin(); it!=path.end(); ++it){
-		  size_type c_ 	= it->c;
-		  size_type lb_ 	= it->lb, rb_ = it->rb;
-		  lb = lb_; rb = lb_;
-		  size_type p2_	= it->p;
-		  while( c_ >= l  ){
-		    for(size_type k = lb_; k < lb; ++k){
-		      report_maximal_exact_match(cst1, s2, c_, p2_, k, _4column, refdescr, startpos, maxdescrlen, p2_offset);
-		    }
-		    for(size_type k = rb; k < rb_; ++k){
-		      report_maximal_exact_match(cst1, s2, c_, p2_, k, _4column, refdescr, startpos, maxdescrlen, p2_offset);
-		    }
-		    lb = lb_; rb = rb_;
-		    node_type p = cst1.parent( node_type(c_, lb_, rb_-1) );
-		    c_  = cst1.depth(p);
-		    lb_ = cst1.lb(p);
-		    rb_	= cst1.rb(p)+1;
-		  }
-		}
-		if( c==0 ){
-		  p2--;
-		}else{
-		  node_type p = cst1.parent( node_type(c, i, j-1) );
-		  // c = cst1.depth(p);
-		  cout << "--------------" << endl;
-		  i = cst1.lb(p);
-		  j = cst1.rb(p)+1;
-		}
+  while( p2 > 0 ){
+    path_type path;
+    size_type lb = i, rb = j;
+    backward_search(cst1.csa, s2[p2-1], lb, rb);
+    while(lb != rb and p2 > 0){
+      c++;
+      if( c >= l ) path.push_back( path_item(c, lb, rb, p2-1) );
+      i = lb; j = rb;
+      p2--;
+      backward_search(cst1.csa, s2[p2-1], lb, rb);
+    }
+    for(path_type::iterator it=path.begin();it!=path.end(); ++it){
+      size_type c_  = it->c;
+      size_type lb_ = it->lb, rb_ = it->rb;
+      lb = lb_; rb = lb_;
+      size_type p2_ = it->p;     
+      while( c_ >= l  ){
+	for(size_type k = lb_; k < lb; ++k){
+	  report_maximal_exact_match(cst1, s2, c_, p2_, k, _4column, refdescr, startpos, maxdescrlen, p2_offset);
 	}
+	for(size_type k = rb; k < rb_; ++k){
+	  report_maximal_exact_match(cst1, s2, c_, p2_, k, _4column, refdescr, startpos, maxdescrlen, p2_offset);
+	}
+	lb = lb_; rb = rb_;
+	node_type p = cst1.parent( node_type(c_, lb_, rb_-1) );
+	c_  = cst1.depth(p);
+	lb_ = cst1.lb(p);
+	rb_ = cst1.rb(p)+1;
+      }
+    }
+    if( c==0 ){
+      p2--;
+    }else{
+      node_type p = cst1.parent( node_type(c, i, j-1) );
+      c = cst1.depth(p);
+      i = cst1.lb(p);
+      j = cst1.rb(p)+1;
+    }
+  }
 }
 
 
@@ -254,23 +254,22 @@ void anwer_query(const string &query_fasta, const tCST &cst1, tCST::size_type mi
   
   string meta, line;
   ifstream data(query_fasta.c_str());
-  
   if(!data.is_open()) { cerr << "unable to open " << query_fasta << endl; exit(1); }
   
   // Collect meta data.
   while(!data.eof()) {
     getline(data, line); // Load one line at a time.
     if(line.length() == 0) continue;
-		if(line[0] == '>') {
-		  long start = 1, end = line.length() - 1;
-		  trim(line, start, end);
-		  for(long i = start; i <= end; i++) {
-		    if( line[i] == ' ') break; // Behave like MUMmer 3 cut off meta after first space.
-		   	meta += line[i];			
-			}
-		  cerr << "# " << meta << endl;
-		  break;
-		}
+    if(line[0] == '>') {
+      long start = 1, end = line.length() - 1;
+      trim(line, start, end);
+      for(long i = start; i <= end; i++) {
+	if( line[i] == ' ') break; // Behave like MUMmer 3 cut off meta after first space.
+	meta += line[i];			
+      }
+      cerr << "# " << meta << endl;
+      break;
+    }
   }
   
   string *P = new string;
@@ -278,8 +277,8 @@ void anwer_query(const string &query_fasta, const tCST &cst1, tCST::size_type mi
     getline(data, line); // Load one line at a time.
     if(line.length() == 0) continue;
     long start = 0, end = line.length() - 1;
-		// Meta tag line and start of a new sequence.
-		// Collect meta data.
+    // Meta tag line and start of a new sequence
+    // Collect meta data.
     if(line[0] == '>') {
       if(meta != "") {
 	cerr << "# P.length()=" << P->length() << endl;
@@ -294,12 +293,12 @@ void anwer_query(const string &query_fasta, const tCST &cst1, tCST::size_type mi
 	meta = ""; 
       }
       start = 1;
-		  trim(line, start, end);
-		  for(long i = start; i <= end; i++) {
-		    if(line[i] == ' ') break; // Behave like MUMmer 3 cut of meta after first space.
-		    meta += line[i];
-		  }
-		  cerr << "# " << meta << endl;
+      trim(line, start, end);
+      for(long i = start; i <= end; i++) {
+	if(line[i] == ' ') break; // Behave like MUMmer 3 cut of meta after first space.
+	meta += line[i];
+      }
+      cerr << "# " << meta << endl;
     }
     else { // Collect sequence data.
       trim(line, start,end);
@@ -313,22 +312,22 @@ void anwer_query(const string &query_fasta, const tCST &cst1, tCST::size_type mi
 	  }
 	}
 	line[i] = c;
-			  //				*P += c;
+	//				*P += c;
       }
-			P->append(line, start, end-start+1);
+      P->append(line, start, end-start+1);
     }
   }
   // Handle very last sequence.
   if(meta != "") {
-	  cerr << "# P.length()=" << P->length() << endl;
-	  printf("> %s\n", meta.c_str());
-	  maximal_exact_matches(cst1, (const unsigned char*)P->c_str(), P->size(), min_len, _4column, refdescr, startpos, maxdescrlen, 0);
-	  if(rev_comp) {
-	    reverse_complement(*P, nucleotides_only);
-	    printf("> %s Reverse\n", meta.c_str());
-	    maximal_exact_matches(cst1, (const unsigned char*)P->c_str(), P->size(), min_len, _4column, refdescr, startpos, maxdescrlen, 0);
-	  }
-	}
+    cerr << "# P.length()=" << P->length() << endl;
+    printf("> %s\n", meta.c_str());
+    maximal_exact_matches(cst1, (const unsigned char*)P->c_str(), P->size(), min_len, _4column, refdescr, startpos, maxdescrlen, 0);
+    if(rev_comp) {
+      reverse_complement(*P, nucleotides_only);
+      printf("> %s Reverse\n", meta.c_str());
+      maximal_exact_matches(cst1, (const unsigned char*)P->c_str(), P->size(), min_len, _4column, refdescr, startpos, maxdescrlen, 0);
+    }
+  }
   delete P;
 }
 
@@ -399,7 +398,6 @@ int main(int argc, char* argv[]) {
   vector<long> startpos;
   
   load_fasta(ref_fasta, ref, refdescr, startpos);
-
   for(size_t i=0;i<refdescr.size();i++){	
     cerr<<refdescr[i]<<endl;
     cerr<<startpos[i]<<endl;
@@ -423,10 +421,9 @@ int main(int argc, char* argv[]) {
   
 
   string file_name = ref_fasta+"_"+XSTR(BWTK)+".idx";
-  std::cerr<<"# file_name"<<file_name<<std::endl;
-  
+  std::cerr<<"# file_name "<<file_name<<std::endl;
   // create compressed suffix tree
-  //if( !load_from_file(cst,file_name) ){
+  if( !load_from_file(cst,file_name) ){
     cerr<<"# create suffix tree of dna string "<<endl;
     startpos.clear(); refdescr.clear(); 
     cerr<<"ref_fasta = "<<ref_fasta<<endl;
@@ -434,18 +431,17 @@ int main(int argc, char* argv[]) {
     construct_im(cst, ref, 1);
     cerr<<"# suffix tree created"<<endl;
     store_to_file(cst, file_name);
-    // }else{
-    //  cerr<<"#load index from disk"<<endl;
-    //}
-  cerr<<"# size of suffix tree in MB "<< ((double)size_in_mega_bytes(cst))/(1<<20) <<endl;
-  cerr<<"# alphabet size: "<< (int)cst.csa.sigma << endl;
-  for(int i=1; i<(int)cst.csa.sigma; ++i)
+  }else{
+    cerr<<"#load index from disk"<<endl;
+  }
+  cerr<<"# size of suffix tree in MB "<< (size_in_mega_bytes(cst))/(1<<20) <<endl;
+  cerr<<"# alphabet size: "<< cst.csa.sigma << endl;
+  for(int i = 1;i<cst.csa.sigma; ++i)
     {
       cerr<<"\""<<cst.csa.comp2char[i]<<"\" ";
     }
   cerr<<endl;
-  cerr<<"# alpahbet size: "<< (int)cst.csa.wavelet_tree.sigma << endl;
-  
+  cerr<<"# alpahbet size: "<<cst.csa.wavelet_tree.sigma << endl;
   { // free ref
     string dummy;
     dummy.swap(ref);
