@@ -888,8 +888,7 @@ namespace sdsl
      * \par Time complexity
      *  \f$ \Order{1} \f$ for non-leaves and \f$\Order{t_{SA}}\f$ for leaves
      */
-    size_type depth(const node_type& v)const
-    {
+    size_type depth(const node_type& v)const{
       if (v.i == v.j) {
 	return size()-m_csa[v.i];
       } else if (v == root()) {

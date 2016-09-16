@@ -1,4 +1,4 @@
-CXXFLAGS= -fpermissive -O3 -DNDEBUG -std=c++11  #-g -DSDSL_DEBUG # -O3 -DNDEBUG -DSDSL_DEBUG
+CXXFLAGS= -fpermissive -O0 -DNDEBUG -std=c++11  -g #-DSDSL_DEBUG # -O3 -DNDEBUG -DSDSL_DEBUG
 #SDSLINC=../lib/sdsl-lite
 SDSLLIB=../lib/sdsl-lite/build/lib/libsdsl.a
 SDSLDIV=../lib/sdsl-lite/build/lib/libdivsufsort.a

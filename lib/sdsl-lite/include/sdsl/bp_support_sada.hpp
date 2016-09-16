@@ -569,12 +569,11 @@ class bp_support_sada
           *         * the position j of the matching opening parenthesis, if a matching parenthesis exists,
           *         * size() if no matching closing parenthesis exists.
           */
-        size_type find_open(size_type i)const
-        {
+        size_type find_open(size_type i)const {
             assert(i < m_size);
-            if ((*m_bp)[i]) {// if there is a opening parenthesis at index i return i
+	     if ((*m_bp)[i]) {// if there is a opening parenthesis at index i return i
                 return i;
-            }
+		}
 #ifdef USE_CACHE
             size_type a = 0;
             if (find_open_cache.exists(i, a)) {

@@ -50,7 +50,6 @@ typedef csa_wt<csa_wt<>::wavelet_tree_type, BWTK, 10000> tCSA_WT;
 #else
 typedef csa_wt<csa_wt<>::wavelet_tree_type, 4, 10000> tCSA_WT;
 #endif
-//csa_wt<>::wavelet_tree_type, 4, 10000
 
 #ifdef LCPCOMPRESS
 typedef cst_sct3<tCSA_WT, lcp_dac<> > tCST;
@@ -147,7 +146,6 @@ tCST::size_type backward_search(
 void print_maximal_exact_match(tCST::size_type p1, tCST::size_type p2, tCST::size_type len, bool _4column, const vector<string> &refdescr, const vector<long> &startpos, long maxdescrlen){
   if(_4column == false) {
     printf("%8ld  %8ld  %8ld\n", p1+1, p2+1, len);
-    cout << "-----------" << endl;
   }
   else {
     long refseq=0, refpos=0;
@@ -224,13 +222,13 @@ void maximal_exact_matches(const tCST &cst1, const unsigned char *s2, tCST::size
       while( c_ >= l  ){
 	for(size_type k = lb_; k < lb; ++k){
 	  report_maximal_exact_match(cst1, s2, c_, p2_, k, _4column, refdescr, startpos, maxdescrlen, p2_offset);
-	}
+	  }
 	for(size_type k = rb; k < rb_; ++k){
 	  report_maximal_exact_match(cst1, s2, c_, p2_, k, _4column, refdescr, startpos, maxdescrlen, p2_offset);
-	}
+	  }
 	lb = lb_; rb = rb_;
 	node_type p = cst1.parent( node_type(c_, lb_, rb_-1) );
-	c_  = cst1.depth(p);
+	c_  = cst1.node_depth(p)-1;	
 	lb_ = cst1.lb(p);
 	rb_ = cst1.rb(p)+1;
       }
@@ -239,7 +237,7 @@ void maximal_exact_matches(const tCST &cst1, const unsigned char *s2, tCST::size
       p2--;
     }else{
       node_type p = cst1.parent( node_type(c, i, j-1) );
-      c = cst1.depth(p);
+      c = cst1.node_depth(p)-1;
       i = cst1.lb(p);
       j = cst1.rb(p)+1;
     }
@@ -418,7 +416,6 @@ int main(int argc, char* argv[]) {
 
 
   tCST cst;
-  
 
   string file_name = ref_fasta+"_"+XSTR(BWTK)+".idx";
   std::cerr<<"# file_name "<<file_name<<std::endl;
@@ -435,13 +432,13 @@ int main(int argc, char* argv[]) {
     cerr<<"#load index from disk"<<endl;
   }
   cerr<<"# size of suffix tree in MB "<< (size_in_mega_bytes(cst))/(1<<20) <<endl;
-  cerr<<"# alphabet size: "<< cst.csa.sigma << endl;
+  cerr<<"# alphabet size: "<< cst.csa.sigma - 1 << endl;
   for(int i = 1;i<cst.csa.sigma; ++i)
     {
       cerr<<"\""<<cst.csa.comp2char[i]<<"\" ";
     }
   cerr<<endl;
-  cerr<<"# alpahbet size: "<<cst.csa.wavelet_tree.sigma << endl;
+  //cerr<<"# alpahbet size: "<<cst.csa.wavelet_tree.sigma -1  << endl;
   { // free ref
     string dummy;
     dummy.swap(ref);
