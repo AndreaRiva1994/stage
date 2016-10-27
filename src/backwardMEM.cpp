@@ -19,7 +19,6 @@
 */
 #include "../lib/sdsl-lite/include/sdsl/suffix_trees.hpp"   
 #include "../lib/sdsl-lite/include/sdsl/suffix_array_algorithm.hpp"  
-//#include "file_aggiunti/csa_uncompressed.hpp" 
 #include "../lib/sdsl-lite/include/sdsl/csa_wt.hpp" 
 #include "../src/testutils.hpp"
 #include "../lib/sdsl-lite/include/sdsl/io.hpp"
